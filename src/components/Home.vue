@@ -33,12 +33,19 @@
           </div>
         </div>
       </div>
+      <div class="map">
+        <h1>🗺️Map</h1>
+        <l-map :zoom="zoom" :center="center" style="height: 500px; width: 100%">
+          <l-tile-layer :url="url" :attribution="attribution" />
+        </l-map>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { latLng } from "leaflet";
 
 export default {
   name: "Home",
@@ -47,7 +54,12 @@ export default {
       showAbout: false,
       globalCases: null,
       globalDeaths: null,
-      globalRecovered: null
+      globalRecovered: null,
+      zoom: 4,
+      center: latLng(20.5937, 78.9629),
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     };
   },
   methods: {
@@ -143,6 +155,7 @@ h1 {
   border-radius: 10px;
   background-color: azure;
   padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 /* Slide down animation */
