@@ -71,16 +71,16 @@
               :content="
                 'State: ' +
                   data.loc +
-                  ',\t' +
+                  '<br />' +
                   'Indian Cases: ' +
                   data.confirmedCasesIndian +
-                  ',\t' +
+                  '<br />' +
                   'Foreign Cases: ' +
                   data.confirmedCasesForeign +
-                  ',\t' +
+                  '<br />' +
                   'Discharged: ' +
                   data.discharged +
-                  ',\t' +
+                  '<br />' +
                   'Deaths: ' +
                   data.deaths
               "
