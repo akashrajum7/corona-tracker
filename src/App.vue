@@ -17,6 +17,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Inconsolata&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 * {
   margin: 0px;
   padding: 0px;

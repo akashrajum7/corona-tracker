@@ -4,7 +4,12 @@
       <span class="site-logo">🦠 Corona-tracker</span>
       <span class="nav-items">
         <ul>
-          <li @click="handleAbout">🤔about</li>
+          <li class="nav-padding">
+            <a @click="updateData">🔄Refresh</a>
+          </li>
+          <li>
+            <a @click="handleAbout">🤔about</a>
+          </li>
         </ul>
       </span>
     </nav>
@@ -183,9 +188,19 @@ export default {
           this.globalCases = data.confirmed.value;
           this.globalRecovered = data.recovered.value;
           this.globalDeaths = data.deaths.value;
+          this.$toasted.success("Successfully updated global data.", {
+            icon: "check",
+            duration: 3000,
+            keepOnHover: true
+          });
         })
         .catch(err => {
           console.error("Error fetching data from API.\n", err);
+          this.$toasted.error("Failed to updated global data.", {
+            icon: "error",
+            duration: 3000,
+            keepOnHover: true
+          });
         });
 
       // Get indian data
@@ -202,9 +217,20 @@ export default {
             this.indianMapData[index] = regionalData[index];
             this.indianMapData[index].latlng = this.indianLatLng[index];
           }
+          this.$toasted.success("Successfully updated Indian data.", {
+            icon: "check",
+            duration: 3000,
+            keepOnHover: true
+          });
         })
         .catch(err => {
           console.error("Error fetching data from API.\n", err);
+          console.error("Error fetching data from API.\n", err);
+          this.$toasted.error("Failed to updated Indian data.", {
+            icon: "error",
+            duration: 3000,
+            keepOnHover: true
+          });
         });
 
       // Get global map data
@@ -212,9 +238,20 @@ export default {
         .get("https://covid19.mathdro.id/api/confirmed")
         .then(res => {
           this.worldMapData = res.data;
+          this.$toasted.success("Successfully updated global map data.", {
+            icon: "check",
+            duration: 3000,
+            keepOnHover: true
+          });
         })
         .catch(err => {
           console.error("Error fetching data from API.\n", err);
+          console.error("Error fetching data from API.\n", err);
+          this.$toasted.error("Failed to updated global map data.", {
+            icon: "error",
+            duration: 3000,
+            keepOnHover: true
+          });
         });
     }
   },
@@ -242,8 +279,12 @@ nav {
 }
 .nav-items > ul {
   list-style: none;
+}
+
+.nav-items > ul > li > a {
   cursor: pointer;
 }
+
 .site-logo {
   font-weight: 600;
 }
@@ -297,6 +338,14 @@ h1 {
   background-color: azure;
   padding: 1rem;
   margin-bottom: 2rem;
+}
+
+.nav-items > ul {
+  display: flex;
+}
+
+.nav-padding {
+  padding-right: 1rem;
 }
 
 /* Slide down animation */

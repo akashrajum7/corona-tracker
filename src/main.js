@@ -2,6 +2,9 @@ import Vue from "vue";
 import App from "./App.vue";
 import { LMap, LTileLayer, LMarker, LTooltip } from "vue2-leaflet";
 import "leaflet/dist/leaflet.css";
+import Toasted from "vue-toasted";
+
+Vue.use(Toasted);
 
 Vue.component("l-map", LMap);
 Vue.component("l-tile-layer", LTileLayer);
