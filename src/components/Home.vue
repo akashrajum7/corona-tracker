@@ -18,6 +18,9 @@
           retrieved from
           <a href="https://github.com/amodm/api-covid19-in"
             >api-covid-19-india</a
+          >. <br /><br />
+          <a href="https://github.com/akashrajum7/corona-tracker"
+            >Source code available on GitHub</a
           >.
         </p>
       </div>
