@@ -270,12 +270,13 @@ export default {
   max-width: 1040px;
   margin: auto;
 }
-.nav-items {
-  float: right;
-}
+
 nav {
   padding: 1.2rem;
   font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .nav-items > ul {
   list-style: none;
@@ -346,6 +347,20 @@ h1 {
 
 .nav-padding {
   padding-right: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .nav-items {
+    margin-top: 1rem;
+  }
+  nav {
+    display: grid;
+    justify-content: space-around;
+    padding-bottom: 0px;
+  }
+  .about-info {
+    margin-top: 1rem;
+  }
 }
 
 /* Slide down animation */
