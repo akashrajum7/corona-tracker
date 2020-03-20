@@ -13,15 +13,17 @@
       <div class="about-info">
         <p>
           Corona-tracker is an app that uses
-          <a href="https://github.com/mathdroid/covid-19-api">COVID-19 API</a>
+          <a
+            href="https://github.com/mathdroid/covid-19-api"
+          >COVID-19 API</a>
           to show current status of Coronavirus around the globe. Indian data is
           retrieved from
-          <a href="https://github.com/amodm/api-covid19-in"
-            >api-covid-19-india</a
-          >. <br /><br />
-          <a href="https://github.com/akashrajum7/corona-tracker"
-            >Source code available on GitHub</a
-          >.
+          <a
+            href="https://github.com/amodm/api-covid19-in"
+          >api-covid-19-india</a>.
+          <br />
+          <br />
+          <a href="https://github.com/akashrajum7/corona-tracker">Source code available on GitHub</a>.
         </p>
       </div>
     </div>
@@ -59,8 +61,8 @@
         <l-map
           :zoom="zoom"
           :center="center"
-          :bounds="bounds"
-          :maxBounds="maxBounds"
+          :worldCopyJump="true"
+          :min-zoom="minZoom"
           style="height: 500px; width: 100%"
         >
           <l-tile-layer :url="url" :attribution="attribution" />
@@ -89,6 +91,16 @@
               "
             ></l-tooltip>
           </l-marker>
+          <l-marker
+            :lat-lng="[data.lat, data.long]"
+            v-for="data in worldMapData"
+            :key="data.countryRegion"
+            :icon="icon"
+          >
+            <l-tooltip
+              :content="'Country: ' + data.countryRegion + '<br />' + 'State: ' + data.provinceState + '<br />' + 'Confirmed: ' + data.confirmed + '<br />' + 'Recovered: ' + data.recovered + '<br />' + 'Deaths: ' + data.deaths + '<br />' + 'Active: ' + data.active"
+            ></l-tooltip>
+          </l-marker>
         </l-map>
       </div>
     </div>
@@ -110,6 +122,7 @@ export default {
       indianCases: null,
       indianDeaths: null,
       indianRecovered: null,
+      worldMapData: [],
       indianMapData: [],
       indianLatLng: [
         [15.9129, 79.74],
@@ -134,6 +147,7 @@ export default {
         [22.9868, 87.855]
       ],
       zoom: 4,
+      minZoom: 3,
       center: latLng(20.5937, 78.9629),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
@@ -188,6 +202,16 @@ export default {
             this.indianMapData[index] = regionalData[index];
             this.indianMapData[index].latlng = this.indianLatLng[index];
           }
+        })
+        .catch(err => {
+          console.error("Error fetching data from API.\n", err);
+        });
+
+      // Get global map data
+      axios
+        .get("https://covid19.mathdro.id/api/confirmed")
+        .then(res => {
+          this.worldMapData = res.data;
         })
         .catch(err => {
           console.error("Error fetching data from API.\n", err);
