@@ -94,7 +94,7 @@
           <l-marker
             :lat-lng="[data.lat, data.long]"
             v-for="data in worldMapData"
-            :key="data.countryRegion"
+            :key="data.index"
             :icon="icon"
           >
             <l-tooltip
@@ -220,6 +220,9 @@ export default {
   },
   created() {
     this.updateData();
+  },
+  updated() {
+    console.log("Component updated");
   }
 };
 </script>
