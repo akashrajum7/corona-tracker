@@ -208,9 +208,13 @@ export default {
         .get("https://api.rootnet.in/covid19-in/stats/latest")
         .then(res => {
           const indianData = res.data;
-          this.indianCases = indianData.data.summary.total;
-          this.indianRecovered = indianData.data.summary.discharged;
-          this.indianDeaths = indianData.data.summary.deaths;
+          axios.get("https://covid19.mathdro.id/api/countries/in").then(res => {
+            const indianSummary = res.data;
+            this.indianCases = indianSummary.confirmed.value;
+            this.indianRecovered = indianSummary.recovered.value;
+            this.indianDeaths = indianSummary.deaths.value;
+          });
+
           const regionalData = indianData.data.regional;
           let index;
           for (index in regionalData) {
@@ -224,7 +228,6 @@ export default {
           });
         })
         .catch(err => {
-          console.error("Error fetching data from API.\n", err);
           console.error("Error fetching data from API.\n", err);
           this.$toasted.error("Failed to updated Indian data.", {
             icon: "error",
