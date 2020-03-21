@@ -114,7 +114,7 @@
 
 <script>
 import axios from "axios";
-import { latLngBounds, latLng, icon } from "leaflet";
+import { latLng, icon } from "leaflet";
 
 export default {
   name: "Home",
@@ -157,14 +157,6 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      bounds: latLngBounds([
-        [7.798, 68.14712],
-        [37.09, 97.34466]
-      ]),
-      maxBounds: latLngBounds([
-        [7.798, 68.14712],
-        [37.09, 97.34466]
-      ]),
       icon: icon({
         iconUrl: "/microbe.png",
         iconSize: [25, 25],
