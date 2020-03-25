@@ -68,6 +68,8 @@
           :center="center"
           :worldCopyJump="true"
           :min-zoom="minZoom"
+          :bounds="bounds"
+          :maxBounds="maxBounds"
           style="height: 500px; width: 100%"
         >
           <l-tile-layer :url="url" :attribution="attribution" />
@@ -96,7 +98,7 @@
               "
             ></l-tooltip>
           </l-marker>
-          <l-marker
+          <!-- <l-marker
             :lat-lng="[data.lat, data.long]"
             v-for="data in worldMapData"
             :key="data.index"
@@ -105,7 +107,7 @@
             <l-tooltip
               :content="'Country: ' + data.countryRegion + '<br />' + 'State: ' + data.provinceState + '<br />' + 'Confirmed: ' + data.confirmed + '<br />' + 'Recovered: ' + data.recovered + '<br />' + 'Deaths: ' + data.deaths + '<br />' + 'Active: ' + data.active"
             ></l-tooltip>
-          </l-marker>
+          </l-marker>-->
         </l-map>
       </div>
     </div>
@@ -114,7 +116,7 @@
 
 <script>
 import axios from "axios";
-import { latLng, icon } from "leaflet";
+import { latLngBounds, latLng, icon } from "leaflet";
 
 export default {
   name: "Home",
@@ -129,31 +131,41 @@ export default {
       indianRecovered: null,
       worldMapData: [],
       indianMapData: [],
-      indianLatLng: [
-        [15.9129, 79.74],
-        [25.0961, 85.3131],
-        [21.2787, 81.8661],
-        [28.7041, 77.1025],
-        [22.2587, 71.1924],
-        [29.0588, 76.0856],
-        [31.1048, 77.1734],
-        [15.3173, 75.7139],
-        [10.8505, 76.2711],
-        [22.9734, 78.6569],
-        [19.7515, 75.7139],
-        [20.9517, 85.0985],
-        [11.9416, 79.8083],
-        [31.1471, 75.3412],
-        [27.0238, 74.2179],
-        [11.1271, 78.6569],
-        [18.1124, 79.0193],
-        [30.7333, 76.7794],
-        [34.083656, 74.797371],
-        [34.209515, 77.615112],
-        [26.8467, 80.9462],
-        [30.0668, 79.0193],
-        [22.9868, 87.855]
-      ],
+      indianLatLng: {
+        "Andhra Pradesh": [15.9129, 79.74],
+        Bihar: [25.0961, 85.3131],
+        Chhattisgarh: [21.2787, 81.8661],
+        Delhi: [28.7041, 77.1025],
+        Gujarat: [22.2587, 71.1924],
+        Haryana: [29.0588, 76.0856],
+        "Himachal Pradesh": [31.1048, 77.1734],
+        Karnataka: [15.3173, 75.7139],
+        Kerala: [10.8505, 76.2711],
+        "Madhya Pradesh": [22.9734, 78.6569],
+        Maharashtra: [19.7515, 75.7139],
+        Manipur: [24.6637, 93.9063],
+        Mizoram: [23.1645, 92.9376],
+        Odisha: [20.9517, 85.0985],
+        Puducherry: [11.9416, 79.8083],
+        Punjab: [31.1471, 75.3412],
+        Rajasthan: [27.0238, 74.2179],
+        "Tamil Nadu": [11.1271, 78.6569],
+        Telengana: [18.1124, 79.0193],
+        Chandigarh: [30.7333, 76.7794],
+        "Jammu and Kashmir": [33.7782, 76.5762],
+        Ladakh: [34.209515, 77.615112],
+        "Uttar Pradesh": [26.8467, 80.9462],
+        Uttarakhand: [30.0668, 79.0193],
+        "West Bengal": [22.9868, 87.855]
+      },
+      bounds: latLngBounds([
+        [7.798, 68.14712],
+        [37.09, 97.34466]
+      ]),
+      maxBounds: latLngBounds([
+        [7.798, 68.14712],
+        [37.09, 97.34466]
+      ]),
       zoom: 4,
       minZoom: 3,
       center: latLng(20.5937, 78.9629),
@@ -212,17 +224,19 @@ export default {
 
           const regionalData = indianData.data.regional;
           let index;
-          if (regionalData.length == this.indianLatLng.length) {
+          try {
             for (index in regionalData) {
               this.indianMapData[index] = regionalData[index];
-              this.indianMapData[index].latlng = this.indianLatLng[index];
+              this.indianMapData[index].latlng = this.indianLatLng[
+                regionalData[index].loc
+              ];
             }
             this.$toasted.success("Successfully updated Indian data.", {
               icon: "check",
               duration: 3000,
               keepOnHover: true
             });
-          } else {
+          } catch (err) {
             throw new Error("Location data has changed.");
           }
         })
@@ -236,25 +250,24 @@ export default {
         });
 
       // Get global map data
-      axios
-        .get("https://covid19.mathdro.id/api/confirmed")
-        .then(res => {
-          this.worldMapData = res.data;
-          this.$toasted.success("Successfully updated global map data.", {
-            icon: "check",
-            duration: 3000,
-            keepOnHover: true
-          });
-        })
-        .catch(err => {
-          console.error("Error fetching data from API.\n", err);
-          console.error("Error fetching data from API.\n", err);
-          this.$toasted.error("Failed to updated global map data.", {
-            icon: "error",
-            duration: 3000,
-            keepOnHover: true
-          });
-        });
+      // axios
+      //   .get("https://covid19.mathdro.id/api/confirmed")
+      //   .then(res => {
+      //     this.worldMapData = res.data;
+      //     this.$toasted.success("Successfully updated global map data.", {
+      //       icon: "check",
+      //       duration: 3000,
+      //       keepOnHover: true
+      //     });
+      //   })
+      //   .catch(err => {
+      //     console.error("Error fetching data from API.\n", err);
+      //     this.$toasted.error("Failed to updated global map data.", {
+      //       icon: "error",
+      //       duration: 3000,
+      //       keepOnHover: true
+      //     });
+      //   });
     }
   },
   created() {
