@@ -224,21 +224,24 @@ export default {
 
           const regionalData = indianData.data.regional;
           let index;
-          try {
-            for (index in regionalData) {
-              this.indianMapData[index] = regionalData[index];
+          for (index in regionalData) {
+            this.indianMapData[index] = regionalData[index];
+            if (this.indianLatLng[regionalData[index].loc]) {
               this.indianMapData[index].latlng = this.indianLatLng[
                 regionalData[index].loc
               ];
+            } else {
+              throw new Error(
+                "Location data has changed, the newly added location is " +
+                  regionalData[index].loc
+              );
             }
-            this.$toasted.success("Successfully updated Indian data.", {
-              icon: "check",
-              duration: 3000,
-              keepOnHover: true
-            });
-          } catch (err) {
-            throw new Error("Location data has changed.");
           }
+          this.$toasted.success("Successfully updated Indian data.", {
+            icon: "check",
+            duration: 3000,
+            keepOnHover: true
+          });
         })
         .catch(err => {
           console.error("Error fetching data from API.\n", err);
