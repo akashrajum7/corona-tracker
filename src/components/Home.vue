@@ -156,7 +156,9 @@ export default {
         Ladakh: [34.209515, 77.615112],
         "Uttar Pradesh": [26.8467, 80.9462],
         Uttarakhand: [30.0668, 79.0193],
-        "West Bengal": [22.9868, 87.855]
+        "West Bengal": [22.9868, 87.855],
+        "Andaman and Nicobar Islands": [11.7401, 92.6586],
+        Goa: [15.2993, 74.124]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
