@@ -158,7 +158,10 @@ export default {
         Uttarakhand: [30.0668, 79.0193],
         "West Bengal": [22.9868, 87.855],
         "Andaman and Nicobar Islands": [11.7401, 92.6586],
-        Goa: [15.2993, 74.124]
+        Goa: [15.2993, 74.124],
+        "Arunachal Pradesh": [28.218, 94.7278],
+        Assam: [26.2006, 92.9376],
+        Jharkhand: [23.6102, 85.2799]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
