@@ -161,7 +161,8 @@ export default {
         Goa: [15.2993, 74.124],
         "Arunachal Pradesh": [28.218, 94.7278],
         Assam: [26.2006, 92.9376],
-        Jharkhand: [23.6102, 85.2799]
+        Jharkhand: [23.6102, 85.2799],
+        Tripura: [23.9408, 91.9882]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
