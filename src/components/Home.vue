@@ -43,7 +43,7 @@
             <span class="count">{{ globalRecovered }}</span> Recovered
           </div>
           <div class="cases-deaths">
-            <span class="count">{{ globalDeaths }}</span> deaths
+            <span class="count">{{ globalDeaths }}</span> Deaths
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
             <span class="count">{{ indianRecovered }}</span> Recovered
           </div>
           <div class="cases-deaths">
-            <span class="count">{{ indianDeaths }}</span> deaths
+            <span class="count">{{ indianDeaths }}</span> Deaths
           </div>
         </div>
       </div>
