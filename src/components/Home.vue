@@ -163,7 +163,9 @@ export default {
         Assam: [26.2006, 92.9376],
         Jharkhand: [23.6102, 85.2799],
         Tripura: [23.9408, 91.9882],
-        Nagaland: [26.1584, 94.5624]
+        "Nagaland#": [26.1584, 94.5624],
+        Nagaland: [26.1584, 94.5624],
+        Meghalaya: [25.467, 91.3662]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
