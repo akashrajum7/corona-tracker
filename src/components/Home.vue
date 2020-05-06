@@ -166,7 +166,8 @@ export default {
         Tripura: [23.9408, 91.9882],
         "Nagaland#": [26.1584, 94.5624],
         Nagaland: [26.1584, 94.5624],
-        Meghalaya: [25.467, 91.3662]
+        Meghalaya: [25.467, 91.3662],
+        "Dadar Nagar Haveli": [20.1809, 73.0169]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
