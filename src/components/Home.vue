@@ -168,7 +168,9 @@ export default {
         Nagaland: [26.1584, 94.5624],
         Meghalaya: [25.467, 91.3662],
         "Dadar Nagar Haveli": [20.1809, 73.0169],
-        Sikkim: [27.533, 88.5122]
+        Sikkim: [27.533, 88.5122],
+        "Dadra and Nagar Haveli and Daman and Diu": [20.4283, 72.8397],
+        Telangana: [18.1124, 79.0193]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
