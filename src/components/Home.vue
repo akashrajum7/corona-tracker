@@ -170,7 +170,8 @@ export default {
         "Dadar Nagar Haveli": [20.1809, 73.0169],
         Sikkim: [27.533, 88.5122],
         "Dadra and Nagar Haveli and Daman and Diu": [20.4283, 72.8397],
-        Telangana: [18.1124, 79.0193]
+        Telangana: [18.1124, 79.0193],
+        Lakshadweep: [13.7000, 72.1833]
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
