@@ -10,7 +10,7 @@
   "dependencies": {
     "@growthbunker/vueflags": "0.0.6",
     "@vue/cli-plugin-babel": "4.1.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "leaflet": "^1.6.0",
     "vue": "^2.6.11",
     "vue-toasted": "^1.1.28",
