@@ -5,10 +5,10 @@
       <span class="nav-items">
         <ul>
           <li class="nav-padding">
-            <a @click="updateData">🔄Refresh</a>
+            <a @click="updateData">🔄 Refresh</a>
           </li>
           <li>
-            <a @click="handleAbout">🤔about</a>
+            <a @click="handleAbout">🤔 about</a>
           </li>
         </ul>
       </span>
@@ -18,23 +18,23 @@
       <div class="about-info">
         <p>
           Corona-tracker is an app that uses
-          <a
-            href="https://github.com/mathdroid/covid-19-api"
-          >COVID-19 API</a>
+          <a href="https://github.com/mathdroid/covid-19-api">COVID-19 API</a>
           to show current status of Coronavirus around the globe. Indian data is
           retrieved from
-          <a
-            href="https://github.com/amodm/api-covid19-in"
-          >api-covid-19-india</a>.
+          <a href="https://github.com/amodm/api-covid19-in"
+            >api-covid-19-india</a
+          >.
           <br />
           <br />
-          <a href="https://github.com/akashrajum7/corona-tracker">Source code available on GitHub</a>.
+          <a href="https://github.com/akashrajum7/corona-tracker"
+            >Source code available on GitHub</a
+          >.
         </p>
       </div>
     </div>
     <div class="body">
       <div class="global-cases">
-        <h1>🌏Global Cases</h1>
+        <h1>🌏 Global Cases</h1>
         <div class="cases-sub">
           <div class="cases-confirmed">
             <span class="count">{{ globalCases }}</span> Confirmed
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="indian-cases">
-        <h1>🇮🇳India</h1>
+        <h1>🇮🇳 India</h1>
         <div class="cases-sub">
           <div class="cases-confirmed">
             <span class="count">{{ indianCases }}</span> Confirmed
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="map">
-        <h1>🗺️Map</h1>
+        <h1>🗺️ Map</h1>
         <l-map
           :zoom="zoom"
           :center="center"
@@ -77,7 +77,6 @@
             v-for="data in indianMapData"
             :key="data.loc"
             :lat-lng="data.latlng"
-            :icon="icon"
           >
             <l-tooltip
               :content="
@@ -116,7 +115,7 @@
 
 <script>
 import axios from "axios";
-import { latLngBounds, latLng, icon } from "leaflet";
+import { latLngBounds, latLng } from "leaflet";
 
 export default {
   name: "Home",
@@ -171,15 +170,15 @@ export default {
         Sikkim: [27.533, 88.5122],
         "Dadra and Nagar Haveli and Daman and Diu": [20.4283, 72.8397],
         Telangana: [18.1124, 79.0193],
-        Lakshadweep: [13.7000, 72.1833]
+        Lakshadweep: [13.7, 72.1833],
       },
       bounds: latLngBounds([
         [7.798, 68.14712],
-        [37.09, 97.34466]
+        [37.09, 97.34466],
       ]),
       maxBounds: latLngBounds([
         [7.798, 68.14712],
-        [37.09, 97.34466]
+        [37.09, 97.34466],
       ]),
       zoom: 4,
       minZoom: 3,
@@ -187,11 +186,11 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      icon: icon({
-        iconUrl: "/microbe.png",
-        iconSize: [25, 25],
-        iconAnchor: [16, 37]
-      })
+      // icon: icon({
+      //   iconUrl: "/microbe.png",
+      //   iconSize: [25, 25],
+      //   iconAnchor: [16, 37],
+      // }),
     };
   },
   methods: {
@@ -205,7 +204,7 @@ export default {
       // Get global data
       axios
         .get("https://covid19.mathdro.id/api")
-        .then(res => {
+        .then((res) => {
           const data = res.data;
           this.globalCases = data.confirmed.value;
           this.globalRecovered = data.recovered.value;
@@ -213,29 +212,31 @@ export default {
           this.$toasted.success("Successfully updated global data.", {
             icon: "check",
             duration: 3000,
-            keepOnHover: true
+            keepOnHover: true,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("Error fetching data from API.\n", err);
           this.$toasted.error("Failed to updated global data.", {
             icon: "error",
             duration: 3000,
-            keepOnHover: true
+            keepOnHover: true,
           });
         });
 
       // Get indian data
       axios
         .get("https://api.rootnet.in/covid19-in/stats/latest")
-        .then(res => {
+        .then((res) => {
           const indianData = res.data;
-          axios.get("https://covid19.mathdro.id/api/countries/in").then(res => {
-            const indianSummary = res.data;
-            this.indianCases = indianSummary.confirmed.value;
-            this.indianRecovered = indianSummary.recovered.value;
-            this.indianDeaths = indianSummary.deaths.value;
-          });
+          axios
+            .get("https://covid19.mathdro.id/api/countries/in")
+            .then((res) => {
+              const indianSummary = res.data;
+              this.indianCases = indianSummary.confirmed.value;
+              this.indianRecovered = indianSummary.recovered.value;
+              this.indianDeaths = indianSummary.deaths.value;
+            });
 
           const regionalData = indianData.data.regional;
           let index;
@@ -255,15 +256,15 @@ export default {
           this.$toasted.success("Successfully updated Indian data.", {
             icon: "check",
             duration: 3000,
-            keepOnHover: true
+            keepOnHover: true,
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("Error fetching data from API.\n", err);
           this.$toasted.error("Failed to updated Indian data.", {
             icon: "error",
             duration: 3000,
-            keepOnHover: true
+            keepOnHover: true,
           });
         });
 
@@ -286,11 +287,11 @@ export default {
       //       keepOnHover: true
       //     });
       //   });
-    }
+    },
   },
   created() {
     this.updateData();
-  }
+  },
 };
 </script>
 
