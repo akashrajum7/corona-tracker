@@ -140,6 +140,7 @@ export default {
         "Himachal Pradesh": [31.1048, 77.1734],
         Karnataka: [15.3173, 75.7139],
         Kerala: [10.8505, 76.2711],
+        "Kerala***": [10.8505, 76.2711],
         "Madhya Pradesh": [22.9734, 78.6569],
         Maharashtra: [19.7515, 75.7139],
         Manipur: [24.6637, 93.9063],
